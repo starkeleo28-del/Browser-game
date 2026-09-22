@@ -7,6 +7,7 @@ const clicksPerSecondText = document.querySelector("#clicksPerSecond");
 const upgradeCostText = document.querySelector("#upgradecost");
 const upgradeCostBar = document.querySelector("#upgradeCostBar");
 const autoClickerImage = document.querySelector("#click2");
+const clickSound = new Audio("sounds/clickersound.mp3")
 
 let upgradepointperclickcost = 10*2
 let upgradeclickperseccost = 8*2
@@ -55,15 +56,15 @@ setInterval(function() {
 }, 1000);
 
 {
-    pointUpgrades.addEventListener("click", function() {
+     {
         console.log ("upgrade clicked!")
         point.textContent = points;
         document.querySelector("click")
         document.querySelector("#click")
-})
+}
 }
 {
-    pointUpgrades.addEventListener("click", function(){
+   
         document.querySelector("#pointsPerClick")
     if (points >= upgradepointperclickcost){
         points -= upgradepointperclickcost;
@@ -75,6 +76,20 @@ setInterval(function() {
         updateUpgradeCost();
 
     }
-});
+};
 updateUpgradeCost();
+
+{
+    image.addEventListener("click", function(){
+clickSound.currentTime = 0;
+clickSound.play();
+points += pointperupgrade;
+point.textContent = points;
+image.classList.remove("pulsing");
+void image.offsetWidth;
+image.classList.add("pulsing");
+
+
+
+    });
 }
