@@ -7,6 +7,7 @@ const clicksPerSecondText = document.querySelector("#clicksPerSecond");
 const upgradeCostText = document.querySelector("#upgradecost");
 const upgradeCostBar = document.querySelector("#upgradeCostBar");
 const autoClickerImage = document.querySelector("#click2");
+const clickSound = new Audio("sounds/clickersound.mp3")
 
 let pointUpgradeCost = 20;
 let pointsPerClick = 1;
@@ -69,3 +70,13 @@ pointUpgrades.addEventListener("click", function() {
 
 secondUpgrade.textContent = "Upgrade clicks per second (" + clicksPerSecondCost + " points)";
 updateUpgradeCost();
+
+image.addEventListener("click", function() {
+    clickSound.currentTime = 0;
+    clickSound.play();
+    points += pointsPerClick;
+    point.textContent = points;
+    image.classList.remove("pulsing");
+    void image.offsetWidth;
+    image.classList.add("pulsing");
+});
