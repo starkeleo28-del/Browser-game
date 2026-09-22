@@ -7,76 +7,89 @@ const clicksPerSecondText = document.querySelector("#clicksPerSecond");
 const upgradeCostText = document.querySelector("#upgradecost");
 const upgradeCostBar = document.querySelector("#upgradeCostBar");
 const autoClickerImage = document.querySelector("#click2");
-const clickSound = new Audio("sounds/clickersound.mp3")
+const clickSound = new Audio("sound/clickersound.mp3")
 
-let pointUpgradeCost = 20;
-let pointsPerClick = 1;
-let points = 0;
-let clicksPerSecond = 0;
-let clicksPerSecondCost = 16;
+let upgradepointperclickcost = 10*2
+let upgradeclickperseccost = 8*2
+let pointperupgrade = 1
+let upgradepointperclick = 1+2
+let points = 0
+let clicksPerSecond = 0
+let upgradeClickPerSecondCost = 16
 
 function updateUpgradeCost() {
-    upgradeCostText.textContent = pointUpgradeCost;
-    upgradeCostBar.max = pointUpgradeCost;
-    upgradeCostBar.value = Math.min(points, pointUpgradeCost);
-    pointUpgrades.textContent = "Upgrade points per click (" + pointUpgradeCost + " points)";
-}
-
-function updatePoints() {
-    point.textContent = points;
-    updateUpgradeCost();
-}
-
-function playPulse(element) {
-    element.classList.remove("pulsing");
-    void element.offsetWidth;
-    element.classList.add("pulsing");
+    upgradeCostText.textContent = upgradepointperclickcost;
+    upgradeCostBar.max = upgradepointperclickcost;
+    upgradeCostBar.value = Math.min(points, upgradepointperclickcost);
 }
 
 image.addEventListener("click", function() {
-    points += pointsPerClick;
-    updatePoints();
-    playPulse(image);
-});
+    console.log ("image clicked!")
+    points += pointperupgrade
+    point.textContent = points;
+    document.querySelector("click")
+document.querySelector("#click")
+image.classList.remove("pulsing");
+void image.offsetWidth;
+image.classList.add("pulsing");
+})
 
 secondUpgrade.addEventListener("click", function() {
-    if (points >= clicksPerSecondCost) {
-        points -= clicksPerSecondCost;
+    if (points >= upgradeClickPerSecondCost) {
+        points -= upgradeClickPerSecondCost;
         clicksPerSecond += 1;
-        clicksPerSecondCost = Math.ceil(clicksPerSecondCost * 1.5);
-        updatePoints();
+        upgradeClickPerSecondCost = Math.ceil(upgradeClickPerSecondCost * 1.5);
+        point.textContent = points;
         clicksPerSecondText.textContent = clicksPerSecond;
-        secondUpgrade.textContent = "Upgrade clicks per second (" + clicksPerSecondCost + " points)";
+        secondUpgrade.textContent = "Upgrade clicks per second (" + upgradeClickPerSecondCost + " points)";
     }
 });
 
 setInterval(function() {
     if (clicksPerSecond > 0) {
         points += clicksPerSecond;
-        updatePoints();
-        playPulse(autoClickerImage);
+        point.textContent = points;
+        autoClickerImage.classList.remove("pulsing");
+        void autoClickerImage.offsetWidth;
+        autoClickerImage.classList.add("pulsing");
     }
 }, 1000);
 
-pointUpgrades.addEventListener("click", function() {
-    if (points >= pointUpgradeCost) {
-        points -= pointUpgradeCost;
-        pointsPerClick += 2;
-        pointUpgradeCost = Math.ceil(pointUpgradeCost * 1.5);
-        pointPerClickText.textContent = pointsPerClick;
-        updatePoints();
+{
+    pointUpgrades.addEventListener("click", function() {
+        console.log ("upgrade clicked!")
+        point.textContent = points;
+        document.querySelector("click")
+        document.querySelector("#click")
+})
+}
+{
+    pointUpgrades.addEventListener("click", function(){
+        document.querySelector("#pointsPerClick")
+    if (points >= upgradepointperclickcost){
+        points -= upgradepointperclickcost;
+        pointperupgrade += 2
+        upgradepointperclickcost = 
+        Math.ceil(upgradepointperclickcost * 1.5);
+        point.textContent = points;
+        pointPerClickText.textContent = pointperupgrade;
+        updateUpgradeCost();
+
     }
 });
-
-secondUpgrade.textContent = "Upgrade clicks per second (" + clicksPerSecondCost + " points)";
 updateUpgradeCost();
+}
+{
+    image.addEventListener("click", function(){
+clickSound.currentTime = 0;
+clickSound.play();
+points += pointperupgrade;
+point.textContent = points;
+image.classList.remove("pulsing");
+void image.offsetWidth;
+image.classList.add("pulsing");
 
-image.addEventListener("click", function() {
-    clickSound.currentTime = 0;
-    clickSound.play();
-    points += pointsPerClick;
-    point.textContent = points;
-    image.classList.remove("pulsing");
-    void image.offsetWidth;
-    image.classList.add("pulsing");
-});
+
+
+    });
+}
