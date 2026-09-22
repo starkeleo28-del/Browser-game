@@ -8,73 +8,64 @@ const upgradeCostText = document.querySelector("#upgradecost");
 const upgradeCostBar = document.querySelector("#upgradeCostBar");
 const autoClickerImage = document.querySelector("#click2");
 
-let upgradepointperclickcost = 10*2
-let upgradeclickperseccost = 8*2
-let pointperupgrade = 1
-let upgradepointperclick = 1+2
-let points = 0
-let clicksPerSecond = 0
-let upgradeClickPerSecondCost = 16
+let pointUpgradeCost = 20;
+let pointsPerClick = 1;
+let points = 0;
+let clicksPerSecond = 0;
+let clicksPerSecondCost = 16;
 
 function updateUpgradeCost() {
-    upgradeCostText.textContent = upgradepointperclickcost;
-    upgradeCostBar.max = upgradepointperclickcost;
-    upgradeCostBar.value = Math.min(points, upgradepointperclickcost);
+    upgradeCostText.textContent = pointUpgradeCost;
+    upgradeCostBar.max = pointUpgradeCost;
+    upgradeCostBar.value = Math.min(points, pointUpgradeCost);
+    pointUpgrades.textContent = "Upgrade points per click (" + pointUpgradeCost + " points)";
+}
+
+function updatePoints() {
+    point.textContent = points;
+    updateUpgradeCost();
+}
+
+function playPulse(element) {
+    element.classList.remove("pulsing");
+    void element.offsetWidth;
+    element.classList.add("pulsing");
 }
 
 image.addEventListener("click", function() {
-    console.log ("image clicked!")
-    points += pointperupgrade
-    point.textContent = points;
-    document.querySelector("click")
-document.querySelector("#click")
-image.classList.remove("pulsing");
-void image.offsetWidth;
-image.classList.add("pulsing");
-})
+    points += pointsPerClick;
+    updatePoints();
+    playPulse(image);
+});
 
 secondUpgrade.addEventListener("click", function() {
-    if (points >= upgradeClickPerSecondCost) {
-        points -= upgradeClickPerSecondCost;
+    if (points >= clicksPerSecondCost) {
+        points -= clicksPerSecondCost;
         clicksPerSecond += 1;
-        upgradeClickPerSecondCost = Math.ceil(upgradeClickPerSecondCost * 1.5);
-        point.textContent = points;
+        clicksPerSecondCost = Math.ceil(clicksPerSecondCost * 1.5);
+        updatePoints();
         clicksPerSecondText.textContent = clicksPerSecond;
-        secondUpgrade.textContent = "Upgrade clicks per second (" + upgradeClickPerSecondCost + " points)";
+        secondUpgrade.textContent = "Upgrade clicks per second (" + clicksPerSecondCost + " points)";
     }
 });
 
 setInterval(function() {
     if (clicksPerSecond > 0) {
         points += clicksPerSecond;
-        point.textContent = points;
-        autoClickerImage.classList.remove("pulsing");
-        void autoClickerImage.offsetWidth;
-        autoClickerImage.classList.add("pulsing");
+        updatePoints();
+        playPulse(autoClickerImage);
     }
 }, 1000);
 
-{
-    pointUpgrades.addEventListener("click", function() {
-        console.log ("upgrade clicked!")
-        point.textContent = points;
-        document.querySelector("click")
-        document.querySelector("#click")
-})
-}
-{
-    pointUpgrades.addEventListener("click", function(){
-        document.querySelector("#pointsPerClick")
-    if (points >= upgradepointperclickcost){
-        points -= upgradepointperclickcost;
-        pointperupgrade += 2
-        upgradepointperclickcost = 
-        Math.ceil(upgradepointperclickcost * 1.5);
-        point.textContent = points;
-        pointPerClickText.textContent = pointperupgrade;
-        updateUpgradeCost();
-
+pointUpgrades.addEventListener("click", function() {
+    if (points >= pointUpgradeCost) {
+        points -= pointUpgradeCost;
+        pointsPerClick += 2;
+        pointUpgradeCost = Math.ceil(pointUpgradeCost * 1.5);
+        pointPerClickText.textContent = pointsPerClick;
+        updatePoints();
     }
 });
+
+secondUpgrade.textContent = "Upgrade clicks per second (" + clicksPerSecondCost + " points)";
 updateUpgradeCost();
-}

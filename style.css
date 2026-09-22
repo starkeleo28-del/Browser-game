@@ -5,8 +5,10 @@ body{
 }
 img{
     display: block;
-width: 500px;
+width:500px;
 height: 500px;
+max-width: 80vw;
+max-height: 70vh;
 border-radius: 50%;
 object-fit: cover;
 margin: 0% auto;
@@ -18,7 +20,7 @@ object-fit: cover;
 button{
     border-color: black;
     background-color: yellow;
-   border: width 1px;
+    border: 1px solid black;
 }
 p{
     color: yellow;
@@ -29,20 +31,58 @@ body{
 }
 @keyframes pulse{
     0% {
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
     50%{
-transform: scale(1.1);
+transform: translate(-50%, -50%) scale(1.1);
     }
     100%{
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 img.pulsing {
     animation: pulse 0.25s ease;
 }
+#click {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+}
 #click2{
+    position: fixed;
+    top: calc(50% + min(250px, 35vh) + 20px);
+    left: 50%;
     width: 50px;
     height: 50px;
+    margin: 0;
+    transform: translateX(-50%);
     object-fit: contain;
+}
+
+#upgradeBar {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 220px;
+    padding: 20px;
+    background: #754343;
+    border: 2px solid yellow;
+}
+
+#upgradeBar button {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 10px;
+}
+
+.upgradeStat {
+    margin: 8px 0;
+}
+
+#upgradeCostBar {
+    width: 100%;
+    margin-bottom: 8px;
 }
